@@ -10,7 +10,7 @@ RM = rm
 test = TestUnitTest++
 	
 test_src = tests/Main.cpp \
-	tests/kiln_program.cpp
+	tests/application.cpp
 
 test_objects = $(patsubst %.cpp, %.o, $(test_src))
 test_dependencies = $(subst .o,.d,$(test_objects))
