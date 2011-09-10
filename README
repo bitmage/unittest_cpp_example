@@ -4,4 +4,10 @@ This is a hello-world for UnitTest++ which can be found here:
 
 It walks through how to add the appropriate files to your project and create a Makefile that will compile and run your tests.
 
+1. Download the source code for UnitTest++ from the link above.
+2. Compile the source by changing to the directory and typing `make`.
+3. Copy the libUnitTest++.a and all headers from the /src/ directory to a lib directory in your project.
+4. Create a makefile based off the root directory of this project.  Make sure to modify the `src` and `test_src` variables to match the files you would like to link and test.
+
+In my use, I am only using a Makefile for testing purposes so do not need to integrate this with an existing Makefile.  Any comments/forks with your specific use cases are welcome!
 
