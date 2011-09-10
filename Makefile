@@ -9,10 +9,16 @@ RM = rm
 
 test = TestUnitTest++
 	
+src = src/application.cpp
+
 test_src = tests/Main.cpp \
 	tests/application.cpp
 
+lib = tests/lib/libUnitTest++.a
+
+objects = $(patsubst %.cpp, %.o, $(src))
 test_objects = $(patsubst %.cpp, %.o, $(test_src))
+dependencies = $(subst .o,.d,$(objects))
 test_dependencies = $(subst .o,.d,$(test_objects))
 
 define make-depend
@@ -28,6 +34,10 @@ endef
 
 all: $(test)
 
+$(lib): $(objects) 
+	@echo Creating $(lib) library...
+	@ar cr $(lib) $(objects)
+    
 $(test): $(lib) $(test_objects)
 	@echo Linking $(test)...
 	@$(CXX) $(LDFLAGS) -o $(test) $(test_objects) $(lib)
@@ -35,7 +45,7 @@ $(test): $(lib) $(test_objects)
 	@./$(test)
 
 clean:
-	-@$(RM) $(test_objects) $(test_dependencies) $(test) $(lib) 2> /dev/null
+	-@$(RM) $(objects) $(test_objects) $(dependencies) $(test_dependencies) $(test) $(lib) 2> /dev/null
 
 %.o : %.cpp
 	@echo $<
@@ -44,5 +54,7 @@ clean:
 
 
 ifneq "$(MAKECMDGOALS)" "clean"
+-include $(dependencies)
 -include $(test_dependencies)
 endif
+

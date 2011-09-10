@@ -6,8 +6,8 @@ namespace {
 
   TEST(ValidCheckSucceeds)
   {
-      bool const b = true;
-      CHECK(b);
+      Application app;
+      CHECK(app.greeting() == "Hello world!\n");
   }
 
 }

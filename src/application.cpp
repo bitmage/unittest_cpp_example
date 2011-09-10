@@ -1,7 +1,6 @@
-#include <iostream>
+#include "application.h"
 
-class Application{
-  int main() {
-    std::cout << "Hello world!\n";
-  }
+string Application::greeting() {
+  return((string)"Hello world!\n");
 }
+
